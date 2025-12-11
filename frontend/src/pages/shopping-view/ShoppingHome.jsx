@@ -409,7 +409,7 @@ function ShoppingHome() {
 
           {/* Copyright */}
           <div className="mt-8 text-center text-gray-500 text-sm">
-            © {new Date().getFullYear()} YourBrand. All rights reserved.
+            © {new Date().getFullYear()} WEARLO. All rights reserved.
           </div>
         </div>
       </footer>

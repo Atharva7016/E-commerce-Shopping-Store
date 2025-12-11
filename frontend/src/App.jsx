@@ -26,6 +26,9 @@ const SearchPage = lazy(() => import("./pages/shopping-view/SearchPage"));
 const OrderSuccess = lazy(() => import("./pages/shopping-view/OrderSuccess"));
 const OrderCancel = lazy(() => import("./pages/shopping-view/OrderCancel"));
 
+// Import Landing Page
+import LandingPage from "./pages/landing/LandingPage";
+
 function App() {
   const { isAuthenticated, user, isLoading } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -43,13 +46,9 @@ function App() {
       <div className="flex flex-col overflow-hidden bg-white">
         <Suspense fallback={<LoadingSpinner />}>
           <Routes>
-            <Route
-              path="/"
-              element={
-                <CheckAuth isAuthenticated={isAuthenticated} user={user}>
-                </CheckAuth>
-              }
-            />
+            {/* Landing Page Route - Public accessible */}
+            <Route path="/" element={<LandingPage />} />
+            
             <Route
               path="/auth"
               element={
