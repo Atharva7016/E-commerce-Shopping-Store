@@ -60,7 +60,11 @@ npm install
 ```
 
 4. Set up environment variables
-Create `.env` files in both frontend and backend directories with the necessary environment variables.
+Copy the example files and fill in your values:
+```bash
+copy frontend\.env.example frontend\.env
+copy backend\.env.example backend\.env
+```
 
 5. Start the Development Servers
 
@@ -87,9 +91,10 @@ VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key
 ### Backend (.env)
 ```
 PORT=5000
-MONGODB_URI=your_mongodb_uri
+MONGO_URL=mongodb://127.0.0.1:27017/ecommerce-shopping-store
 JWT_SECRET=your_jwt_secret
 STRIPE_SECRET_KEY=your_stripe_secret_key
+CLIENT_BASE_URL=http://localhost:5173
 ```
 
 

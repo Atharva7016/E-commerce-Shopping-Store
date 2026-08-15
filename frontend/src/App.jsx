@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, Suspense, lazy } from "react";
-import { checkAuth } from "./store/authSlice/authSlice";
+import { checkAuth, resetState } from "./store/authSlice/authSlice";
 import { Skeleton } from "@/components/ui/skeleton"
 import LoadingSpinner from "./components/LoadingSpinner";
 import CheckAuth from "./components/common/CheckAuth";
@@ -34,8 +34,18 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const token = JSON.parse(sessionStorage.getItem('token'));
-    dispatch(checkAuth(token));
+    let token = null;
+    try {
+      token = JSON.parse(sessionStorage.getItem("token"));
+    } catch {
+      token = null;
+    }
+
+    if (token) {
+      dispatch(checkAuth(token));
+    } else {
+      dispatch(resetState());
+    }
   }, [dispatch]);
 
   if (isLoading) return <LoadingSpinner />

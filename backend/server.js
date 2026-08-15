@@ -77,7 +77,8 @@
 // console.log(`Example app listening on port ${port}`)
 // })
 
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -154,6 +155,7 @@ app.use((req, res, next) => {
 });
 
 app.use(cookieParser());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /* ============================
    MONGODB CONNECTION (CACHED)
@@ -167,6 +169,10 @@ async function connectDB() {
   }
 
   if (isConnected) return;
+
+  if (!process.env.MONGO_URL) {
+    throw new Error("MONGO_URL is missing in backend/.env");
+  }
 
   try {
     await mongoose.connect(process.env.MONGO_URL, {
@@ -232,6 +238,11 @@ process.on("SIGINT", async () => {
 /* ============================
    START SERVER
 ============================ */
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`🚀 Server running on port ${PORT}`);
+  try {
+    await connectDB();
+  } catch (error) {
+    console.error("❌ MongoDB connection failed on startup:", error.message);
+  }
 });

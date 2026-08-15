@@ -11,6 +11,9 @@ import womenImg from "../../assets/category/women.png";
 import kidsImg from "../../assets/category/kids.png";
 import accessoriesImg from "../../assets/category/accessories.png";
 import footwearImg from "../../assets/category/footwear.jpg";
+import banner1 from "../../assets/banner-1.webp";
+import banner2 from "../../assets/banner-2.webp";
+import banner3 from "../../assets/banner-3.webp";
 import { Button } from "@/components/ui/button";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -57,6 +60,12 @@ const categoriesWithIcon = [
   },
 ];
 
+const fallbackBanners = [
+  { image: banner1 },
+  { image: banner2 },
+  { image: banner3 },
+];
+
 const brandsWithIcon = [
   { id: "nike", label: "Nike", imageUrl: nikeLogo, alt: "Nike Logo" },
   { id: "adidas", label: "Adidas", imageUrl: adidasLogo, alt: "Adidas Logo" },
@@ -77,14 +86,17 @@ function ShoppingHome() {
   const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
   const navigate = useNavigate();
   const { featureImageList } = useSelector((state) => state.commonFeature);
+  const slides =
+    featureImageList?.length > 0 ? featureImageList : fallbackBanners;
 
   useEffect(() => {
+    if (!slides.length) return;
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % featureImageList.length);
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [featureImageList]);
+  }, [slides.length]);
 
   useEffect(() => {
     dispatch(
@@ -142,7 +154,7 @@ function ShoppingHome() {
       {/* banner section */}
       <div className="relative w-full min-h-[250px] sm:min-h-[300px] md:h-[400px] lg:h-[600px] xl:h-[600px] overflow-hidden">
         {/* Banner Images */}
-        {featureImageList?.map((slide, index) => (
+        {slides.map((slide, index) => (
           <img
             key={index}
             src={slide.image}
@@ -176,7 +188,7 @@ function ShoppingHome() {
 
         {/* Dot Navigation for Mobile */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-          {featureImageList.map((_, idx) => (
+          {slides.map((_, idx) => (
             <span
               key={idx}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
