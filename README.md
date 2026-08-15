@@ -43,8 +43,8 @@ Visit the live application at: [E-commerce Shopping Store](https://e-commerce-sh
 
 1. Clone the repository
 ```bash
-git clone https://github.com/AYNR325/E-commerce-Shopping-Store.git
-cd e-commerce-website
+git clone https://github.com/Atharva7016/E-commerce-Shopping-Store.git
+cd E-commerce-Shopping-Store
 ```
 
 2. Install Frontend Dependencies
@@ -97,14 +97,7 @@ STRIPE_SECRET_KEY=your_stripe_secret_key
 CLIENT_BASE_URL=http://localhost:5173
 ```
 
-
-
 ## 👤 Author
 
 Ayush Rokade
 - GitHub: [@AYNR325](https://github.com/AYNR325)
-
-
----
-
- 
