@@ -99,5 +99,4 @@ CLIENT_BASE_URL=http://localhost:5173
 
 ## 👤 Author
 
-Ayush Rokade
-- GitHub: [@AYNR325](https://github.com/AYNR325)
+Atharva Patil
