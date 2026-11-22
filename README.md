@@ -25,9 +25,7 @@ Visit the live application at: [E-commerce Shopping Store](https://e-commerce-sh
 
 ### Frontend
 - React.js
-- Tailwind CSS
 - Vite
-- Shadcn UI Components
 - React Router
 - Redux Toolkit
 
